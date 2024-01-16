@@ -1,45 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const { getcontact }
-
-router.route('/').get((req, res) => {
-    res.status(200).json(
-        {
-
-            messege: 'contact',
-            name: 'muhsin'
-        }
-    )
-
-}).post((req, res) => {
-    res.status(200).json(
-        {
-
-            messege: `${req.body}`,
-            name: 'muhsin'
-        }
-    )
-
+const { getcontact,createcontact,contactforme, deletecontact }=require('../Controllers/ContactController.js')
+router.use((req,res,next)=>{
+    console.log('middleware is called')
+    next()
 })
-router.route('/:id').put((req, res) => {
-    res.status(200).json(
-        {
 
-            messege: `create contact for me ${req.params.id} `,
-            name: 'muhsin'
-        }
-    )
 
-}).delete((req, res) => {
-    res.status(200).json(
-        {
+router.route('/')
+.get(getcontact)
+.post(createcontact)
 
-            messege: `delete contact for me ${req.params.id} `,
-            name: 'muhsin'
-        }
-    )
-
-})
+router.route('/:id')
+.put(contactforme)
+.delete(deletecontact)
 
 
 
